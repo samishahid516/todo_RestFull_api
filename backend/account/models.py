@@ -28,7 +28,6 @@ class UserManager(BaseUserManager):
         """
         user = self.create_user(
             email,
-            username,
             name=name,
             tc=tc,
             password=password,
@@ -44,7 +43,7 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    username = models.CharField(max_length=50, unique=True, null=True, blank=True)
+    # username = models.CharField(max_length=50, unique=True, null=True, blank=True)
     name = models.CharField(max_length=50)
     tc = models.BooleanField()
     is_active = models.BooleanField(default=True)
@@ -55,7 +54,9 @@ class User(AbstractBaseUser):
 
     objects = UserManager()
 
-    USERNAME_FIELD = "username"
+    # USERNAME_FIELD = "username"
+
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['name','tc']
 
     def __str__(self):
